@@ -25,6 +25,11 @@ mvn clean install
 java -jar calculator-rest/target/calculator-rest-0.0.1-SNAPSHOT.jar
 ```
 
+## As APIs podem ser testadas via swagger:
+```
+http://localhost:8080/swagger-ui/index.html
+```
+
 ## Exemplos das chamadas das APIs no browser:
 
 ### Soma (sum)

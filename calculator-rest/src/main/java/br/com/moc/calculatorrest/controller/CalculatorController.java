@@ -4,6 +4,10 @@ import br.com.moc.calculatorcore.domain.MocResult;
 import br.com.moc.calculatorcore.domain.Operations;
 import br.com.moc.calculatorrest.constant.Constants;
 import br.com.moc.calculatorrest.queue.RestRabbitAmqpCallback;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +26,15 @@ public class CalculatorController {
     private RestRabbitAmqpCallback restRabbitAmqpCallback;
 
     @GetMapping("/sum")
+    @Operation(summary = "Realiza a Soma de dois elementos")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Resultado da soma",
+                    content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404",
+                    description = "Page not found",
+                    content = @Content)
+    })
     public ResponseEntity<?> sum(@RequestParam(name = "a") Number a, @RequestParam(name = "b") Number b, HttpServletResponse response) {
         String requestId = response.getHeader(Constants.REQUEST_ID);
         log.info("[REST|SESSION-LOG] -{}- Starting SUM Request - Received a={} and b={} for operation", requestId, a, b);
@@ -31,6 +44,15 @@ public class CalculatorController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @Operation(summary = "Realiza a Subtração de dois elementos")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Resultado da subtração",
+                    content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404",
+                    description = "Page not found",
+                    content = @Content)
+    })
     @GetMapping("/subtraction")
     public ResponseEntity<?> subtraction(@RequestParam(name = "a") Number a, @RequestParam(name = "b") Number b, HttpServletResponse response) {
         String requestId = response.getHeader(Constants.REQUEST_ID);
@@ -41,6 +63,15 @@ public class CalculatorController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @Operation(summary = "Realiza a Multiplicação de dois elementos")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Resultado da multiplicação",
+                    content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404",
+                    description = "Page not found",
+                    content = @Content)
+    })
     @GetMapping("/multiplication")
     public ResponseEntity<?> multiplication(@RequestParam(name = "a") Number a, @RequestParam(name = "b") Number b, HttpServletResponse response) {
         String requestId = response.getHeader(Constants.REQUEST_ID);
@@ -51,6 +82,15 @@ public class CalculatorController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @Operation(summary = "Realiza a Divisão de dois elementos")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Resultado da divisão",
+                    content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404",
+                    description = "Page not found",
+                    content = @Content)
+    })
     @GetMapping("/division")
     public ResponseEntity<?> division(@RequestParam(name = "a") Number a, @RequestParam(name = "b") Number b, HttpServletResponse response) {
         String requestId = response.getHeader(Constants.REQUEST_ID);
