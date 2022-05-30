@@ -1,0 +1,31 @@
+<!--
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <appender name="access_stdout"
+              class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashAccessEncoder"/>
+    </appender>
+
+    <appender-ref ref="access_stdout"/>
+</configuration>
+-->
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <appender name="access_stdout"
+              class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!--
+            <pattern>common</pattern>
+            -->
+
+            <Pattern>[ACCESS-LOG|%X{trace_id}] %h %l %u %t{yyyy-MM-dd HH:mm:ss.SSS} %s %b %D ms</Pattern>
+
+            <!--
+            <pattern> %d{yyyy-MM-dd HH:mm:ss.SSS} %thread [%X{trace-id}] [%-5level] %class{0} - %msg%n       </pattern>
+            -->
+        </encoder>
+    </appender>
+
+    <appender-ref ref="access_stdout"/>
+
+</configuration>
